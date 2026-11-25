@@ -1,5 +1,6 @@
 # Shade Match – Fabric Batch Colour Comparison System
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub_Pages-2EA44F?logo=github&logoColor=white)](https://aruni302.github.io/ShadeMatch-App-MAPT22B136/#dashboard)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Vanilla JS](https://img.shields.io/badge/Vanilla-JavaScript-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![HTML5 / CSS3](https://img.shields.io/badge/HTML5%20%2F%20CSS3-Responsive-E34F26?logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
@@ -7,6 +8,8 @@
 [![Offline Capable](https://img.shields.io/badge/Offline-100%25%20Client--Side-success)](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps)
 
 **Shade Match** is a modern, standalone web application engineered for garment factory Quality Control (QC) teams to detect and analyze color variations across fabric rolls and dye lots before cutting and sewing.
+
+> 🌐 **Live Website**: [https://aruni302.github.io/ShadeMatch-App-MAPT22B136/#dashboard](https://aruni302.github.io/ShadeMatch-App-MAPT22B136/#dashboard)
 
 Built entirely with standard Web APIs (pure HTML5, CSS3, and vanilla JavaScript), Shade Match requires **zero dependencies, no backend server, and no build tools**. It runs directly in any modern desktop, tablet, or mobile browser.
 
@@ -163,6 +166,11 @@ ShadeMatch-App/
 
 ## Getting Started
 
+### 🌐 Live Web Application
+
+Access the hosted web application directly:
+**[https://aruni302.github.io/ShadeMatch-App-MAPT22B136/#dashboard](https://aruni302.github.io/ShadeMatch-App-MAPT22B136/#dashboard)**
+
 ### Prerequisites
 
 No build tools, Node.js, Python, or web servers are required. Any modern web browser (Google Chrome, Microsoft Edge, Mozilla Firefox, Safari) will run the application.
@@ -171,12 +179,12 @@ No build tools, Node.js, Python, or web servers are required. Any modern web bro
 
 1. Clone or download this repository:
    ```bash
-   git clone https://github.com/your-username/shade-match.git
-   cd shade-match/ShadeMatch-App
+   git clone https://github.com/Aruni302/ShadeMatch-App-MAPT22B136.git
+   cd ShadeMatch-App-MAPT22B136
    ```
 2. Double-click `index.html` or open it directly in your browser:
    ```text
-   file:///path/to/ShadeMatch-App/index.html
+   file:///path/to/index.html
    ```
 3. *(Optional)* Serve through any local HTTP server:
    ```bash
