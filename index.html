@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#2F3E9E">
+<meta name="description" content="Shade Match – Professional Fabric Batch Colour Comparison System for garment factory QC">
+<title>Shade Match – Fabric Colour QC</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <!-- SIDEBAR -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#111" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M3 12h2M19 12h2M12 3v2M12 19v2M5.6 5.6l1.4 1.4M16.9 16.9l1.4 1.4M5.6 18.4l1.4-1.4M16.9 7.1l1.4-1.4"/></svg>
+      </div>
+      <div class="logo-text">Shade Match<span>Fabric QC System</span></div>
+    </div>
+    <div class="sidebar-nav">
+      <div class="nav-item active" data-page="dashboard">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <span class="nav-label">Dashboard</span>
+      </div>
+      <div class="nav-item" data-page="add-batch">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg>
+        <span class="nav-label">Add New Batch</span>
+      </div>
+      <div class="nav-item" data-page="batches">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        <span class="nav-label">Fabric Batches</span>
+      </div>
+      <div class="nav-item" data-page="compare">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+        <span class="nav-label">Compare Batches</span>
+      </div>
+      <div class="nav-item" data-page="history">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        <span class="nav-label">History &amp; Reports</span>
+      </div>
+      <div class="nav-item" data-page="settings">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        <span class="nav-label">Settings</span>
+      </div>
+    </div>
+    <div class="sidebar-footer">
+      <div class="sidebar-toggle" id="sidebarToggle" title="Collapse sidebar">
+        <svg width="16" height="16" id="sidebarToggleIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 17l-5-5 5-5M18 17l-5-5 5-5"/></svg>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <div class="main">
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-title" id="topbarTitle">Dashboard</div>
+      <div class="topbar-actions">
+        <div class="icon-btn" id="themeToggle" title="Toggle theme">
+          <svg id="themeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
+        </div>
+        <button class="btn btn-primary btn-sm" onclick="navigate('add-batch')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          Add Batch
+        </button>
+      </div>
+    </header>
+
+    <!-- PAGE CONTENT -->
+    <div class="page-content">
+
+      <!-- ===== DASHBOARD PAGE ===== -->
+      <div class="page active" id="page-dashboard">
+        <div class="page-header">
+          <div class="page-header-left">
+            <h1>Dashboard</h1>
+            <p id="dashGreeting">Welcome back — quality control at a glance</p>
+          </div>
+        </div>
+        <div class="grid grid-4" style="margin-bottom:20px">
+          <div class="stat-card"><div class="stat-icon" style="background:#ede9fe"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6d28d9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg></div><div class="stat-info"><div class="stat-value" id="stat-batches">0</div><div class="stat-label">Total Batches</div></div></div>
+          <div class="stat-card"><div class="stat-icon" style="background:#dbeafe"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div><div class="stat-info"><div class="stat-value" id="stat-orders">0</div><div class="stat-label">Active Orders</div></div></div>
+          <div class="stat-card"><div class="stat-icon" style="background:#dcfce7"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div><div class="stat-info"><div class="stat-value" id="stat-comparisons">0</div><div class="stat-label">Total Comparisons</div></div></div>
+          <div class="stat-card"><div class="stat-icon" style="background:#fee2e2"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#b91c1c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="stat-info"><div class="stat-value" id="stat-mismatch">0%</div><div class="stat-label">Shade Mismatch Rate</div></div></div>
+        </div>
+        <div class="card" style="margin-bottom:20px">
+          <div class="card-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Quick Actions</div>
+          <div class="grid grid-2">
+            <div class="quick-action" onclick="navigate('add-batch')">
+              <div class="qa-icon" style="background:#ede9fe"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6d28d9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg></div>
+              <div><div style="font-weight:600;font-size:14px">Add New Batch</div><div style="font-size:12px;color:var(--text2);margin-top:3px">Register a new fabric batch</div></div>
+            </div>
+            <div class="quick-action" onclick="navigate('compare')">
+              <div class="qa-icon" style="background:#fef9c3"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#a16207" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10M12 20V4M6 20v-6"/></svg></div>
+              <div><div style="font-weight:600;font-size:14px">Compare Batches</div><div style="font-size:12px;color:var(--text2);margin-top:3px">Analyse colour differences</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-2">
+          <div class="card">
+            <div class="card-title" style="justify-content:space-between"><span>Recently Added Batches</span><span class="btn btn-ghost btn-sm" onclick="navigate('batches')" style="cursor:pointer">View All</span></div>
+            <div id="recentBatchesList"></div>
+          </div>
+          <div class="card">
+            <div class="card-title" style="justify-content:space-between"><span>Recent Comparisons</span><span class="btn btn-ghost btn-sm" onclick="navigate('history')" style="cursor:pointer">View All</span></div>
+            <div id="recentHistoryList"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== ADD BATCH PAGE ===== -->
+      <div class="page" id="page-add-batch">
+        <div class="page-header">
+          <div class="page-header-left">
+            <h1 id="batchFormTitle">Add New Batch</h1>
+            <p>Register a new fabric batch for colour quality control</p>
+          </div>
+        </div>
+        <div class="step-indicator" id="batchStepIndicator">
+          <div class="step active" id="step1"><div class="step-circle">1</div><span class="step-label">Batch Details</span><div class="step-line"></div></div>
+          <div class="step" id="step2"><div class="step-circle">2</div><span class="step-label">Fabric Image</span><div class="step-line"></div></div>
+          <div class="step" id="step3"><div class="step-circle">3</div><span class="step-label">Colour Sample</span></div>
+        </div>
+
+        <div id="batchStep1">
+          <div class="card">
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Batch Number <span class="required">*</span></label>
+                <input id="fBatchNum" class="form-control" placeholder="e.g. BT-2024-001" autocomplete="off">
+                <div class="form-hint">Must be unique across all batches</div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Order Number <span class="required">*</span></label>
+                <input id="fOrderNum" class="form-control" placeholder="e.g. ORD-2024-055">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Fabric Type</label>
+                <select id="fFabricType" class="form-control">
+                  <option value="">Select fabric type...</option>
+                  <option>Cotton (100%)</option><option>Cotton/Polyester Blend</option>
+                  <option>Polyester (100%)</option><option>Nylon</option><option>Linen</option>
+                  <option>Viscose / Rayon</option><option>Wool</option><option>Silk</option>
+                  <option>Fleece</option><option>Interlock Knit</option><option>Jersey Knit</option>
+                  <option>Denim</option><option>Twill</option><option>Other</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Supplier Name</label>
+                <input id="fSupplier" class="form-control" placeholder="e.g. Coats Bangladesh Ltd.">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Colour Name</label>
+                <input id="fColourName" class="form-control" placeholder="e.g. Navy Blue, Ash Grey...">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Date Received</label>
+                <input id="fDateReceived" type="date" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Additional Notes</label>
+              <textarea id="fNotes" class="form-control" placeholder="Roll number, dye lot, any visual observations..."></textarea>
+            </div>
+            <div style="display:flex;justify-content:flex-end">
+              <button class="btn btn-primary" onclick="batchNextStep(1)">Next: Upload Image <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+            </div>
+          </div>
+        </div>
+
+        <div id="batchStep2" style="display:none">
+          <div class="card">
+            <div class="card-title">Fabric Image</div>
+            <p style="font-size:13.5px;color:var(--text2);margin-bottom:16px">Capture or upload a photo of the fabric swatch for colour analysis. Use D65 / natural lighting for best results.</p>
+            <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap">
+              <button class="btn btn-primary" onclick="openCamera()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>Take Photo</button>
+              <button class="btn btn-outline" onclick="document.getElementById('imgUploadInput').click()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Upload Image</button>
+              <input type="file" id="imgUploadInput" accept="image/*" style="display:none" onchange="handleImageUpload(event)">
+              <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none" onchange="handleImageUpload(event)">
+            </div>
+            <div id="uploadZone" class="upload-zone" onclick="document.getElementById('imgUploadInput').click()">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto;color:var(--text3)"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+              <p>Click to upload or drag &amp; drop a fabric image<br><small style="font-size:11px">JPG, PNG, WebP — max 20MB</small></p>
+            </div>
+            <div id="imgPreviewWrap" style="display:none;margin-top:16px">
+              <img id="imgPreview" style="max-height:220px;border-radius:var(--radius-sm);border:2px solid var(--border);width:100%;object-fit:contain;background:#111">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
+                <span id="imgInfo" style="font-size:12px;color:var(--text2)"></span>
+                <button class="btn btn-ghost btn-sm" onclick="clearImage()">Remove</button>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;margin-top:20px">
+              <button class="btn btn-ghost" onclick="batchPrevStep(2)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back</button>
+              <div style="display:flex;gap:10px">
+                <button class="btn btn-ghost" onclick="skipImage()">Skip Image</button>
+                <button class="btn btn-primary" id="nextToSampleBtn" onclick="batchNextStep(2)" disabled>Next: Sample Colour <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="batchStep3" style="display:none">
+          <div class="grid grid-2">
+            <div class="card">
+              <div class="card-title">Colour Sampling Area</div>
+              <p style="font-size:12.5px;color:var(--text2);margin-bottom:12px">Drag the yellow box to a representative area. Drag the corner to resize. Avoid seams, shadows and edges.</p>
+              <div class="sampler-container" id="samplerContainer">
+                <canvas id="samplerCanvas"></canvas>
+                <div class="sampler-box" id="samplerBox">
+                  <div class="sampler-resize" id="samplerResize"></div>
+                </div>
+              </div>
+              <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap">
+                <button class="btn btn-outline btn-sm" onclick="resetSamplerBox()">Reset Box</button>
+                <button class="btn btn-ghost btn-sm" onclick="sampleCurrentArea()">Re-sample</button>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title">Sampled Colour Values</div>
+              <div class="colour-preview" id="colourPreview" style="background:#ccc"></div>
+              <div class="colour-values">
+                <div class="colour-val-item"><div class="colour-val-label">HEX</div><div class="colour-val-value" id="cvHex">—</div></div>
+                <div class="colour-val-item"><div class="colour-val-label">RGB</div><div class="colour-val-value" id="cvRgb">—</div></div>
+                <div class="colour-val-item"><div class="colour-val-label">HSL</div><div class="colour-val-value" id="cvHsl">—</div></div>
+                <div class="colour-val-item" style="grid-column:1/-1"><div class="colour-val-label">CIELAB (L* a* b*)</div><div class="colour-val-value" id="cvLab">—</div></div>
+              </div>
+              <div id="noImageSampler" style="display:none;text-align:center;padding:20px;color:var(--text2);font-size:13.5px">
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin:0 auto 10px;opacity:.4"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                <p>No image uploaded. You can still save the batch without an image.</p>
+              </div>
+            </div>
+          </div>
+          <div class="card" style="margin-top:16px">
+            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+              <button class="btn btn-ghost" onclick="batchPrevStep(3)"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> Back</button>
+              <button class="btn btn-primary btn-lg" id="saveBatchBtn" onclick="saveBatch()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>Save Batch</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== BATCHES PAGE ===== -->
+      <div class="page" id="page-batches">
+        <div class="page-header">
+          <div class="page-header-left">
+            <h1>Fabric Batches</h1>
+            <p id="batchesCount">Loading...</p>
+          </div>
+          <button class="btn btn-primary" onclick="navigate('add-batch')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>Add Batch</button>
+        </div>
+        <div class="filter-bar">
+          <div class="search-wrap">
+            <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <input id="batchSearch" placeholder="Search batch or order number..." oninput="renderBatches()">
+          </div>
+          <select id="batchFilterOrder" class="form-control" style="width:auto;min-width:160px" onchange="renderBatches()">
+            <option value="">All Orders</option>
+          </select>
+          <select id="batchSort" class="form-control" style="width:auto;min-width:140px" onchange="renderBatches()">
+            <option value="date-desc">Newest First</option>
+            <option value="date-asc">Oldest First</option>
+            <option value="batch-asc">Batch # A→Z</option>
+            <option value="batch-desc">Batch # Z→A</option>
+            <option value="order-asc">Order # A→Z</option>
+          </select>
+        </div>
+        <div class="grid grid-4" id="batchesGrid"></div>
+      </div>
+
+      <!-- ===== COMPARE PAGE ===== -->
+      <div class="page" id="page-compare">
+        <div class="page-header">
+          <div class="page-header-left">
+            <h1>Compare Fabric Batches</h1>
+            <p>Select batches to analyse colour differences using CIEDE2000</p>
+          </div>
+        </div>
+        <div class="grid grid-2" style="margin-bottom:16px">
+          <div class="card">
+            <div class="card-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>Reference Batch</div>
+            <div class="form-group">
+              <label class="form-label">Select Reference</label>
+              <select id="refBatchSelect" class="form-control" onchange="onRefBatchChange()">
+                <option value="">Choose reference batch...</option>
+              </select>
+            </div>
+            <div id="refBatchPreview"></div>
+          </div>
+          <div class="card">
+            <div class="card-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>Test Batches</div>
+            <div class="form-group">
+              <label class="form-label">Available Test Batches (same order)</label>
+              <div id="testBatchList" class="batch-select-list">
+                <div style="text-align:center;padding:20px;color:var(--text3);font-size:13.5px">Select a reference batch first</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="margin-bottom:16px">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+            <div>
+              <div style="font-weight:600;font-size:14px">Tolerance Threshold</div>
+              <div style="font-size:12.5px;color:var(--text2)">Batches above this ΔE value will be flagged</div>
+            </div>
+            <div class="range-wrap" style="min-width:240px">
+              <input type="range" id="compareTolerance" min="0.5" max="10" step="0.5" value="3.0" oninput="syncTolerance(this.value)">
+              <div class="range-val" id="compareToleranceVal">3.0</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:center;margin-bottom:20px">
+          <button class="btn btn-primary btn-lg" onclick="runComparison()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Run Comparison
+          </button>
+        </div>
+        <div id="compareResults" style="display:none">
+          <div id="comparisonCards"></div>
+          <div id="matrixSection" style="display:none;margin-top:20px">
+            <div class="card">
+              <div class="card-title">Comparison Matrix</div>
+              <div class="table-wrap"><table id="matrixTable" class="matrix-table"></table></div>
+            </div>
+          </div>
+          <div class="card" style="margin-top:16px">
+            <div class="card-title">Save Comparison Report</div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Inspector Name</label>
+                <input id="inspectorName" class="form-control" placeholder="Inspector's name...">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Comparison Date</label>
+                <input id="compareDate" type="date" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Remarks</label>
+              <textarea id="compareRemarks" class="form-control" placeholder="Any observations or actions taken..."></textarea>
+            </div>
+            <div style="display:flex;justify-content:flex-end">
+              <button class="btn btn-primary" onclick="saveComparison()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>Save Report</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== HISTORY PAGE ===== -->
+      <div class="page" id="page-history">
+        <div class="page-header">
+          <div class="page-header-left">
+            <h1>History &amp; Reports</h1>
+            <p id="historyCount">All saved comparison reports</p>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="exportHistoryCSV()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Export CSV</button>
+        </div>
+        <div class="filter-bar">
+          <div class="search-wrap">
+            <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            <input id="historySearch" placeholder="Search order or batch..." oninput="renderHistory()">
+          </div>
+          <select id="historyFilterVerdict" class="form-control" style="width:auto;min-width:160px" onchange="renderHistory()">
+            <option value="">All Verdicts</option>
+            <option value="excellent">Excellent Match</option>
+            <option value="good">Good Match</option>
+            <option value="acceptable">Acceptable</option>
+            <option value="warning">Warning</option>
+            <option value="mismatch">Shade Mismatch</option>
+          </select>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Date</th><th>Order</th><th>Reference</th><th>Test Batches</th><th>Max ΔE</th><th>Verdict</th><th>Inspector</th><th>Actions</th></tr></thead>
+            <tbody id="historyTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ===== SETTINGS PAGE ===== -->
+      <div class="page" id="page-settings">
+        <div class="page-header">
+          <div class="page-header-left">
+            <h1>Settings</h1>
+            <p>Configure application preferences and manage data</p>
+          </div>
+        </div>
+        <div class="grid grid-2">
+          <div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="settings-section">
+                <h3>Colour Analysis</h3>
+                <div class="toggle-row">
+                  <div class="toggle-info">ΔE Tolerance Threshold<small>Batches above this value flagged as mismatch</small></div>
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <input type="range" id="settingsTolerance" min="0.5" max="10" step="0.5" value="3.0" oninput="syncSettingsTolerance(this.value)" style="accent-color:var(--primary);width:120px">
+                    <input type="number" id="settingsToleranceNum" min="0.5" max="10" step="0.5" value="3.0" class="form-control" style="width:70px" oninput="syncSettingsToleranceFromNum(this.value)">
+                  </div>
+                </div>
+                <div class="toggle-row">
+                  <div class="toggle-info">Default Inspector Name<small>Pre-filled in comparison reports</small></div>
+                  <input id="settingsInspector" class="form-control" style="width:180px" placeholder="Inspector name">
+                </div>
+              </div>
+              <div class="settings-section">
+                <h3>Appearance</h3>
+                <div class="toggle-row">
+                  <div class="toggle-info">Dark Mode<small>Switch to dark colour scheme</small></div>
+                  <label class="toggle"><input type="checkbox" id="settingsDark" onchange="applyTheme(this.checked)"><span class="toggle-slider"></span></label>
+                </div>
+              </div>
+              <div style="display:flex;justify-content:flex-end">
+                <button class="btn btn-primary" onclick="saveSettings()">Save Settings</button>
+              </div>
+            </div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Demo Data</div>
+              <p style="font-size:13.5px;color:var(--text2);margin-bottom:14px">Load five realistic fabric batches under a single order to test the comparison engine immediately.</p>
+              <button class="btn btn-accent" onclick="loadDemoData()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>Load Demo Data</button>
+            </div>
+          </div>
+          <div>
+            <div class="card" style="margin-bottom:16px">
+              <div class="card-title">Data Management</div>
+              <div style="display:flex;flex-direction:column;gap:10px">
+                <button class="btn btn-outline" onclick="exportAllData()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Export All Data (JSON)</button>
+                <button class="btn btn-outline" onclick="document.getElementById('importFileInput').click()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Import JSON Backup</button>
+                <input type="file" id="importFileInput" accept=".json" style="display:none" onchange="importData(event)">
+                <button class="btn btn-outline" onclick="exportHistoryCSV()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Export History (CSV)</button>
+                <button class="btn btn-danger" onclick="confirmClearData()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>Clear All Data</button>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-title"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>Fabric Photography Tips</div>
+              <div class="tip-card">
+                <div class="tip-item"><div class="tip-num">1</div><div><strong>Use D65 lighting.</strong> Shoot under standard daylight (D65 / 6500K) or near a north-facing window to minimise metamerism.</div></div>
+                <div class="tip-item"><div class="tip-num">2</div><div><strong>No flash.</strong> Camera flash creates harsh specular highlights that distort measured colour values.</div></div>
+                <div class="tip-item"><div class="tip-num">3</div><div><strong>Consistent distance.</strong> Maintain the same camera-to-fabric distance and angle across all batch photos.</div></div>
+                <div class="tip-item"><div class="tip-num">4</div><div><strong>Avoid shadows.</strong> Lay fabric flat on a neutral grey or white background, free of wrinkles and shadows.</div></div>
+                <div class="tip-item"><div class="tip-num">5</div><div><strong>Consistent conditions.</strong> Photograph all batches of the same order under identical lighting at the same time of day.</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /.page-content -->
+  </div><!-- /.main -->
+
+  <!-- BOTTOM NAV (mobile) -->
+  <nav class="bottomnav" id="bottomNav">
+    <div class="bnav-item active" data-page="dashboard"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg><span>Home</span></div>
+    <div class="bnav-item" data-page="add-batch"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg><span>Add</span></div>
+    <div class="bnav-item" data-page="batches"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg><span>Batches</span></div>
+    <div class="bnav-item" data-page="compare"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10M12 20V4M6 20v-6"/></svg><span>Compare</span></div>
+    <div class="bnav-item" data-page="history"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><span>History</span></div>
+  </nav>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="batchDetailModal">
+  <div class="modal" style="max-width:700px">
+    <div class="modal-header">
+      <span class="modal-title" id="batchDetailTitle">Batch Details</span>
+      <div class="icon-btn" onclick="closeModal('batchDetailModal')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></div>
+    </div>
+    <div class="modal-body" id="batchDetailBody"></div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('batchDetailModal')">Close</button>
+      <button class="btn btn-outline" id="batchDetailCompareBtn">Compare This Batch</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="confirmModal">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-header">
+      <span class="modal-title" id="confirmTitle">Confirm Action</span>
+      <div class="icon-btn" onclick="closeModal('confirmModal')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></div>
+    </div>
+    <div class="modal-body" id="confirmBody"></div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal('confirmModal')">Cancel</button>
+      <button class="btn btn-danger" id="confirmOkBtn">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="reportModal">
+  <div class="modal" style="max-width:800px">
+    <div class="modal-header">
+      <span class="modal-title">Comparison Report</span>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-outline btn-sm" onclick="window.print()">Print</button>
+        <div class="icon-btn" onclick="closeModal('reportModal')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></div>
+      </div>
+    </div>
+    <div class="modal-body" id="reportBody"></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="cameraModal">
+  <div class="modal" style="max-width:500px">
+    <div class="modal-header">
+      <span class="modal-title">Take Photo</span>
+      <div class="icon-btn" onclick="stopCamera()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg></div>
+    </div>
+    <div class="modal-body">
+      <video id="cameraVideo" autoplay playsinline style="width:100%;border-radius:var(--radius-sm);background:#000;max-height:340px;object-fit:cover"></video>
+      <canvas id="cameraCanvas" style="display:none"></canvas>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="stopCamera()">Cancel</button>
+      <button class="btn btn-primary" onclick="capturePhoto()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>Capture</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
